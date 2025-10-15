@@ -12,13 +12,14 @@ const router = createRouter({
     {
       path: '/', /* Especifica que esta ruta corresponde a la raíz de tu dominio (por ejemplo, http://localhost:5173/). */
       name: 'inicio', /* Asigna un nombre a la ruta. por ejemplo, al usar router-link o al navegar programáticamente con router.push(). */
-      component: Inicio /* Especifica el componente que se renderizará cuando el usuario navegue a esta ruta. En este caso, se renderizará 
-                          el componente Inicio que has importado desde ../views/_ClientesView.vue. */
+      component: Inicio, /* Especifica el componente que se renderizará cuando el usuario navegue a esta ruta. En este caso, se renderizará el componente Inicio que has importado desde ../views/_ClientesView.vue. */
+      props: { titulo: 'Listado de Clientes' } /* Pasa props al componente Inicio. En este caso, estás pasando una prop llamada titulo con el valor 'Listado de Clientes'. Esto permite que el componente Inicio reciba datos dinámicos desde la ruta. */
     },
     {
       path: '/agregar',
       name: 'agregar-cliente',
-      component: () => import('../views/_NuevoClienteView.vue')
+      component: () => import('../views/_NuevoClienteView.vue'),
+      props: { titulo: 'Agregar CLiente' }
     }
   ],
 })

@@ -1,7 +1,14 @@
 <script setup>
     // import { RouterLink } from 'vue-router'
+    import { FormKit } from '@formkit/vue'
     import RouterLink from '../components/UI/RouterLink.vue'
     import Heading from '../components/UI/_Heading.vue'
+
+    defineProps({
+        titulo: {
+            type: String
+        }
+    })
 </script>
 
 <template>
@@ -21,7 +28,23 @@
             </RouterLink>
         </div>
 
-        <Heading>Agregar CLiente</Heading>
+        <Heading>{{ titulo }}</Heading>
+
+        <div class="mx-auto mt-10 bg-white shadow">
+            <FormKit
+                type="form"
+            >
+
+            </FormKit>
+            <!-- 
+                <FormKit> es un componente de la librería FormKit para Vue.js. 
+
+                Funciona como un contenedor (equivalente a la etiqueta <form>) 
+                que agrupa todos los campos de entrada (inputs) y se encarga de 
+                gestionar automáticamente la validación, los mensajes de error y 
+                el envío de los datos del formulario.
+            -->
+        </div>
     </div>        
 </template>
 
