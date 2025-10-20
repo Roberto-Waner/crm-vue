@@ -9,6 +9,16 @@
       "empresa": "OPRET",
       "puesto": "Proyect Manager",
       "estado": true
+    },
+    {
+      "id": "01c5",
+      "nombre": "erick",
+      "apellido": "Roque",
+      "email": "erick@gmail.com",
+      "telefono": "849-888-9999",
+      "empresa": "Rancho Guacamayo",
+      "puesto": "Cactador de Vino",
+      "estado": false
     }
   ]
 }
