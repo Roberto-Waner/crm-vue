@@ -1,0 +1,41 @@
+{
+  "clientes": [
+    {
+      "id": "88e0",
+      "nombre": "Juan",
+      "apellido": "Pérez",
+      "email": "ana.gomez@example.com",
+      "telefono": "987-654-3210",
+      "empresa": "OPRET",
+      "puesto": "Programador"
+    },
+    {
+      "id": "81db",
+      "nombre": "Roberto",
+      "apellido": "Waner",
+      "email": "waner301@gmail.com",
+      "telefono": "849-817-3010"
+    },
+    {
+      "id": "2d02",
+      "nombre": "Roberto",
+      "apellido": "Waner",
+      "email": "waner301@gmail.com",
+      "telefono": "849-817-3010"
+    },
+    {
+      "id": "a67f",
+      "nombre": "Roberto",
+      "apellido": "Waner",
+      "email": "waner301@gmail.com",
+      "telefono": "849-817-3010"
+    },
+    {
+      "id": "bbd8",
+      "nombre": "Waner",
+      "apellido": "Pérez",
+      "email": "waner977@gmail.com",
+      "telefono": "987-654-3210"
+    }
+  ]
+}
