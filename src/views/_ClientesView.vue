@@ -1,37 +1,75 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue'
-import axios from 'axios'
-import RouterLink from '../components/UI/RouterLink.vue'
-import Heading from '../components/UI/_Heading.vue'
-import TdCliente from '../components/_Cliente.vue'
+    import { onMounted, ref, computed } from 'vue'
+    // import axios from 'axios'
+    // import axios from '../lib/axios' se removio por la nueva emplementacion del servicio de _ClienteServices.js
+    import ClienteService from '../services/_ClienteServices'
+    import RouterLink from '../components/UI/RouterLink.vue'
+    import Heading from '../components/UI/_Heading.vue'
+    import TdCliente from '../components/_Cliente.vue'
 
-const clientes = ref([])
+    const clientes = ref([])
 
-// Llamada a la API
-onMounted(() => {
-    consultarAPI()
-})
+    // Llamada a la API
+    onMounted(() => {
+        consultarAPI()
+    })
+    /*
+    const consultarAPI = () => {
+        // Con promesas
+        axios.get('http://localhost:4000/clientes')
+            // .then(response => {
+            //     // console.log(response.data)
+            //     console.log(response)
+            // })
+            .then(({ data }) => clientes.value = data)
+            .catch(error => console.log(`Hubo un error: ${error}`))
+    }*/
 
-const consultarAPI = () => {
-    // Con promesas
-    axios.get('http://localhost:4000/clientes')
-        // .then(response => {
-        //     // console.log(response.data)
-        //     console.log(response)
-        // })
-        .then(({ data }) => clientes.value = data)
-        .catch(error => console.log(`Hubo un error: ${error}`))
-}
+    /*
+    const consultarAPI = () => {
+        // Con promesas
+        axios.get('/clientes') // porque se usa directamente la lib de "axios.js"
+            .then(({ data }) => clientes.value = data)
+            .catch(error => console.log(`Hubo un error: ${error}`))
+    }*/
 
-defineProps({
-    titulo: {
-        type: String
+    const consultarAPI = () => {
+        // Con promesas
+        ClienteService.obtenerClientes() // porque ahora se usa el servicio de _ClienteServices.js
+            .then(({ data }) => clientes.value = data)
+            .catch(error => console.log(`Hubo un error: ${error}`))
     }
-})
 
-const clientesExisten = computed(() => {
-    return clientes.value.length > 0
-})
+    defineProps({
+        titulo: {
+            type: String
+        }
+    })
+
+    const clientesExisten = computed(() => {
+        return clientes.value.length > 0
+    })
+
+    const actualizarEstado = ({id, estado}) => {
+        // console.log('actualizando', data)
+        // ClienteService.cambiarEstado(data.idCliente)
+
+        ClienteService.cambiarEstado(id, {estado: !estado})
+            .then(() => {
+                const i = clientes.value.findIndex(cliente => cliente.id === id)
+                clientes.value[i].estado = !estado
+            })
+            .catch(error => console.log(`Hubo un error: ${error}`))
+    }
+
+    const eliminarCliente = id => {
+        ClienteService.eliminarCliente(id)
+            .then(() => {
+                clientes.value = clientes.value.filter(cliente => cliente.id !== id)
+            })
+            .catch(error => console.log(`Hubo un error: ${error}`))
+    }
+
 </script>
 
 <template>
@@ -81,6 +119,8 @@ const clientesExisten = computed(() => {
                                 v-for="cliente in clientes"
                                 :key="cliente.id"
                                 :cliente="cliente"
+                                @actualizar-estado="actualizarEstado"
+                                @eliminar-cliente="eliminarCliente"
                             />
                         </tbody>
                     </table>

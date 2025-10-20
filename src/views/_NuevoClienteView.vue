@@ -1,9 +1,11 @@
 <script setup>
     // import { RouterLink } from 'vue-router'
     import { reactive } from 'vue'
-    import axios from 'axios'
+    // import axios from 'axios'
     import { FormKit } from '@formkit/vue'
     import { useRoute, useRouter} from 'vue-router'
+    // import axios from '../lib/axios'
+    import ClienteService from '../services/_ClienteServices'
     import RouterLink from '../components/UI/RouterLink.vue'
     import Heading from '../components/UI/_Heading.vue'
 
@@ -32,15 +34,27 @@
         nombre: 'Roberto'
     })*/
 
+    /*
     const handleSubmit = (data) => {
         // console.log(data)
-        axios.post('http://localhost:4000/clientes', data)
+        axios.post('/clientes', data)
             // .then(response => console.log(response))
             .then(response => {
                 console.log(response)
                 //Redireccionar
                 // window.location.href = '/' recarga la pagina con javascript
                 // router.push('/')
+                router.push({ name: 'inicio' })
+            })
+            .catch(error => console.log(`Hubo un error: ${error}`))
+    }
+    */
+
+   const handleSubmit = (data) => {
+        data.estado = 1
+        ClienteService.agregarCliente(data)
+            .then(response => {
+                console.log(response)
                 router.push({ name: 'inicio' })
             })
             .catch(error => console.log(`Hubo un error: ${error}`))
